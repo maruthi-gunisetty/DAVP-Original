@@ -1,4 +1,4 @@
-/* Executive Theme: Royal Plum (#3E0856) and Radiant Amber (#FAAE62) */
+/* Executive Corporate Theme: Royal Plum (#3E0856) and Radiant Amber (#FAAE62) */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
@@ -7,17 +7,17 @@
   
   /* Brand Palette */
   --plum-primary: #3E0856;
-  --plum-deep: #1b0326;
-  --plum-surface: rgba(62, 8, 86, 0.45);
+  --plum-deep: #14021d;
+  --plum-surface: #1d0329;
   --gold-primary: #FAAE62;
   --gold-hover: #e89849;
-  --gold-surface: rgba(250, 174, 98, 0.15);
+  --gold-surface: rgba(250, 174, 98, 0.12);
 
-  --bg-primary: #0d0213;
-  --bg-secondary: #170422;
-  --bg-card: rgba(27, 4, 38, 0.78);
-  --border-color: rgba(250, 174, 98, 0.14);
-  --border-highlight: rgba(250, 174, 98, 0.42);
+  --bg-primary: #0f0216;
+  --bg-secondary: #170322;
+  --bg-card: #1c0429;
+  --border-color: rgba(250, 174, 98, 0.18);
+  --border-highlight: rgba(250, 174, 98, 0.45);
   --text-primary: #fdfbf7;
   --text-secondary: #c9b9ce;
   --text-muted: #8d7994;
@@ -25,10 +25,10 @@
 
 [data-theme="light"] {
   --bg-primary: #faf6f0;
-  --bg-secondary: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --border-color: rgba(62, 8, 86, 0.12);
-  --border-highlight: rgba(62, 8, 86, 0.35);
+  --bg-secondary: #f4ede2;
+  --bg-card: #ffffff;
+  --border-color: rgba(62, 8, 86, 0.15);
+  --border-highlight: #3E0856;
   --text-primary: #230432;
   --text-secondary: #584161;
   --text-muted: #8e7897;
@@ -39,70 +39,56 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.25s ease, color 0.25s ease;
   letter-spacing: -0.011em;
-  background-image: 
-    radial-gradient(circle at 15% 10%, rgba(62, 8, 86, 0.55), transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(250, 174, 98, 0.08), transparent 40%);
-  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
 }
 
-/* Glassmorphism Panel with Plum and Gold Glow */
+/* Grounded Corporate Surface Panels (No Floating Shadows, Solid Boundaries) */
 .glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  box-shadow: 0 12px 30px -6px rgba(10, 1, 15, 0.5), 0 4px 12px -2px rgba(62, 8, 86, 0.25);
-}
-
-[data-theme="light"] .glass-panel {
-  box-shadow: 0 6px 20px -2px rgba(62, 8, 86, 0.06);
+  box-shadow: none;
 }
 
 /* Tab Navigation Buttons */
 .tab-btn {
   color: var(--text-secondary);
   border: 1px solid transparent;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .tab-btn:hover {
   color: var(--text-primary);
-  background: rgba(250, 174, 98, 0.08);
+  background-color: rgba(250, 174, 98, 0.08);
 }
 
 [data-theme="light"] .tab-btn:hover {
-  background: rgba(62, 8, 86, 0.05);
+  background-color: rgba(62, 8, 86, 0.06);
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, rgba(62, 8, 86, 0.75), rgba(95, 17, 130, 0.55));
+  background-color: #3E0856;
   border-color: var(--gold-primary);
   color: var(--gold-primary);
   font-weight: 600;
-  box-shadow: 0 0 16px rgba(250, 174, 98, 0.22);
 }
 
 [data-theme="light"] .tab-btn.active {
-  background: #3E0856;
+  background-color: #3E0856;
   border-color: #FAAE62;
   color: #FAAE62;
 }
 
-/* Stat Card Hover Effects */
+/* Stat Cards (Strictly Grounded, No Vertical Floating Movement) */
 .stat-card {
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
   border-color: var(--border-highlight);
-  box-shadow: 0 14px 32px -4px rgba(62, 8, 86, 0.45), 0 0 18px rgba(250, 174, 98, 0.15);
-}
-
-[data-theme="light"] .stat-card:hover {
-  box-shadow: 0 8px 24px -2px rgba(62, 8, 86, 0.1);
+  transform: none;
+  box-shadow: none;
 }
 
 /* Tabular Numbers */
@@ -111,53 +97,43 @@ body {
   font-feature-settings: "tnum" 1, "zero" 1;
 }
 
-/* Minimal Custom Scrollbar */
+/* Clean Professional Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(250, 174, 98, 0.25);
-  border-radius: 9999px;
+  background: rgba(250, 174, 98, 0.3);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(250, 174, 98, 0.45);
+  background: rgba(250, 174, 98, 0.5);
 }
 
-/* Status Indicator Dot with Gold Pulse */
+/* Solid Indicator Dot */
 .live-dot {
   width: 7px;
   height: 7px;
   background-color: var(--gold-primary);
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 0 0 rgba(250, 174, 98, 0.7);
-  animation: pulse-gold 2.2s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 
-@keyframes pulse-gold {
-  0% { box-shadow: 0 0 0 0 rgba(250, 174, 98, 0.7); }
-  70% { box-shadow: 0 0 0 6px rgba(250, 174, 98, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(250, 174, 98, 0); }
-}
-
-/* Tab Fade In */
-@keyframes tabFadeIn {
+/* Clean Instant Content Display (No Movement or Floating) */
+@keyframes viewFadeIn {
   from {
-    opacity: 0;
-    transform: translateY(4px);
+    opacity: 0.85;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .animate-fade-in {
-  animation: tabFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: viewFadeIn 0.15s ease-out forwards;
 }
 
 /* Print Overrides */
@@ -168,11 +144,10 @@ body {
   body {
     background: #ffffff !important;
     color: #000000 !important;
-    background-image: none !important;
   }
   .glass-panel {
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
     background: #ffffff !important;
+    box-shadow: none !important;
   }
 }
