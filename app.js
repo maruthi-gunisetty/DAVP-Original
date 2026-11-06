@@ -1,5 +1,6 @@
 /**
  * DAVP: Ecommerce Sales and Customer Behaviour Intelligence
+ * Theme: Royal Plum (#3E0856) and Radiant Amber (#FAAE62)
  * Author: Maruthi Gunisetty
  */
 
@@ -21,25 +22,30 @@
   let chartRfm = null;
   let chartCountry = null;
 
-  // Color Palettes
+  // Brand Color Palette (#FAAE62 and #3E0856)
   const colors = {
-    blue: '#2563eb',
-    blueLight: 'rgba(37, 99, 235, 0.22)',
-    purple: '#7c3aed',
-    purpleLight: 'rgba(124, 58, 237, 0.22)',
-    emerald: '#059669',
-    emeraldLight: 'rgba(5, 150, 105, 0.22)',
-    amber: '#d97706',
-    amberLight: 'rgba(217, 119, 6, 0.22)',
-    rose: '#e11d48',
-    roseLight: 'rgba(225, 29, 72, 0.22)',
-    slate: '#64748b',
-    categoryColors: ['#2563eb', '#059669', '#d97706', '#7c3aed', '#db2777', '#0891b2'],
+    gold: '#FAAE62',
+    goldLight: 'rgba(250, 174, 98, 0.22)',
+    goldHover: '#e89849',
+    plum: '#3E0856',
+    plumLight: 'rgba(62, 8, 86, 0.45)',
+    plumSurface: 'rgba(62, 8, 86, 0.25)',
+    amethyst: '#c084fc',
+    amethystLight: 'rgba(192, 132, 252, 0.22)',
+    slate: '#94a3b8',
+    categoryColors: [
+      '#FAAE62',
+      '#c084fc',
+      '#e89849',
+      '#9333ea',
+      '#fcd39a',
+      '#a855f7'
+    ],
     segmentColors: {
-      'High Value': '#059669',
-      'Loyal Active': '#2563eb',
+      'High Value': '#FAAE62',
+      'Loyal Active': '#c084fc',
       'Regular': '#94a3b8',
-      'At Risk': '#e11d48'
+      'At Risk': '#f87171'
     }
   };
 
@@ -109,7 +115,7 @@
     initCountryChart();
   }
 
-  // Monthly Revenue Chart
+  // Monthly Revenue Chart (Gold primary line, Amethyst order volume)
   function initMonthlyChart() {
     const ctx = document.getElementById('chart-monthly');
     if (!ctx) return;
@@ -127,19 +133,25 @@
           {
             label: 'Monthly Revenue ($)',
             data: revenues,
-            borderColor: colors.blue,
-            backgroundColor: colors.blueLight,
+            borderColor: colors.gold,
+            backgroundColor: colors.goldLight,
             fill: true,
             tension: 0.35,
+            borderWidth: 2.2,
+            pointBackgroundColor: colors.gold,
+            pointBorderColor: '#1b0326',
+            pointRadius: 4,
             yAxisID: 'y'
           },
           {
             label: 'Order Volume',
             data: orders,
-            borderColor: colors.purple,
+            borderColor: colors.amethyst,
             borderDash: [5, 5],
+            borderWidth: 1.8,
             fill: false,
             tension: 0.2,
+            pointBackgroundColor: colors.amethyst,
             yAxisID: 'y1'
           }
         ]
@@ -151,6 +163,10 @@
         plugins: {
           legend: { labels: { color: getTextColor(), font: { size: 11, family: 'Plus Jakarta Sans' } } },
           tooltip: {
+            backgroundColor: 'rgba(27, 3, 38, 0.95)',
+            borderColor: 'rgba(250, 174, 98, 0.35)',
+            borderWidth: 1,
+            titleColor: colors.gold,
             callbacks: {
               label: function (context) {
                 if (context.datasetIndex === 0) {
@@ -174,7 +190,7 @@
           y1: {
             position: 'right',
             grid: { drawOnChartArea: false },
-            ticks: { color: colors.purple, font: { size: 10 } }
+            ticks: { color: colors.amethyst, font: { size: 10 } }
           }
         }
       }
@@ -197,8 +213,8 @@
         datasets: [{
           label: 'Revenue by Day',
           data: revenues,
-          backgroundColor: colors.purpleLight,
-          borderColor: colors.purple,
+          backgroundColor: 'rgba(250, 174, 98, 0.35)',
+          borderColor: colors.gold,
           borderWidth: 1.5,
           borderRadius: 6
         }]
@@ -209,6 +225,9 @@
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: 'rgba(27, 3, 38, 0.95)',
+            borderColor: 'rgba(250, 174, 98, 0.35)',
+            borderWidth: 1,
             callbacks: { label: c => ' Revenue: ' + formatCurrency(c.raw) }
           }
         },
@@ -240,7 +259,8 @@
         datasets: [{
           data: revenues,
           backgroundColor: colors.categoryColors,
-          borderWidth: 0,
+          borderWidth: 2,
+          borderColor: '#190324',
           hoverOffset: 6
         }]
       },
@@ -250,6 +270,9 @@
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: 'rgba(27, 3, 38, 0.95)',
+            borderColor: 'rgba(250, 174, 98, 0.35)',
+            borderWidth: 1,
             callbacks: {
               label: function (c) {
                 const pct = ((c.raw / totalRev) * 100).toFixed(1);
@@ -270,8 +293,8 @@
         return `
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${colors.categoryColors[i]}"></span>
-            <span class="text-gray-300 font-medium truncate">${c.category}:</span>
-            <span class="text-gray-400 font-mono-num ml-auto">${pct}%</span>
+            <span class="text-[#fdfbf7] font-medium truncate">${c.category}:</span>
+            <span class="text-[#FAAE62] font-mono-num ml-auto font-semibold">${pct}%</span>
           </div>
         `;
       }).join('');
@@ -295,8 +318,8 @@
         datasets: [{
           label: 'Revenue',
           data: revenues,
-          backgroundColor: colors.blueLight,
-          borderColor: colors.blue,
+          backgroundColor: 'rgba(250, 174, 98, 0.35)',
+          borderColor: colors.gold,
           borderWidth: 1.5,
           borderRadius: 6
         }]
@@ -308,6 +331,9 @@
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: 'rgba(27, 3, 38, 0.95)',
+            borderColor: 'rgba(250, 174, 98, 0.35)',
+            borderWidth: 1,
             callbacks: {
               label: c => ' Revenue: ' + formatCurrency(c.raw)
             }
@@ -345,7 +371,8 @@
         datasets: [{
           data: values,
           backgroundColor: bgColors,
-          borderWidth: 0,
+          borderWidth: 2,
+          borderColor: '#190324',
           hoverOffset: 6
         }]
       },
@@ -358,6 +385,9 @@
             labels: { color: getTextColor(), font: { size: 11, family: 'Plus Jakarta Sans' } }
           },
           tooltip: {
+            backgroundColor: 'rgba(27, 3, 38, 0.95)',
+            borderColor: 'rgba(250, 174, 98, 0.35)',
+            borderWidth: 1,
             callbacks: {
               label: c => ` ${c.label}: ${formatNumber(c.raw)} customers`
             }
@@ -367,7 +397,7 @@
     });
   }
 
-  // Country Revenue Chart
+  // Country Revenue Chart (Plum and Amber theme)
   function initCountryChart() {
     const ctx = document.getElementById('chart-country');
     if (!ctx) return;
@@ -384,20 +414,20 @@
           label: 'Revenue by Country',
           data: revenues,
           backgroundColor: [
-            'rgba(37, 99, 235, 0.35)',
-            'rgba(5, 150, 105, 0.35)',
-            'rgba(124, 58, 237, 0.35)',
-            'rgba(217, 119, 6, 0.35)',
-            'rgba(225, 29, 72, 0.35)',
-            'rgba(8, 145, 178, 0.35)'
+            'rgba(250, 174, 98, 0.65)',
+            'rgba(192, 132, 252, 0.65)',
+            'rgba(232, 152, 73, 0.65)',
+            'rgba(147, 51, 234, 0.65)',
+            'rgba(251, 146, 60, 0.65)',
+            'rgba(168, 85, 247, 0.65)'
           ],
           borderColor: [
-            '#2563eb',
-            '#059669',
-            '#7c3aed',
-            '#d97706',
-            '#e11d48',
-            '#0891b2'
+            '#FAAE62',
+            '#c084fc',
+            '#e89849',
+            '#9333ea',
+            '#fb923c',
+            '#a855f7'
           ],
           borderWidth: 1.5,
           borderRadius: 8
@@ -409,6 +439,9 @@
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: 'rgba(27, 3, 38, 0.95)',
+            borderColor: 'rgba(250, 174, 98, 0.35)',
+            borderWidth: 1,
             callbacks: { label: c => ' Revenue: ' + formatCurrency(c.raw) }
           }
         },
@@ -433,16 +466,16 @@
       matrixBody.innerHTML = rfmData.stats.map(s => {
         const segColor = colors.segmentColors[s.Segment] || '#94a3b8';
         return `
-          <tr class="hover:bg-gray-800/40 transition">
+          <tr class="hover:bg-[#3E0856]/30 transition">
             <td class="py-2.5 px-3">
-              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold" style="background-color: ${segColor}18; color: ${segColor}; border: 1px solid ${segColor}35;">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold" style="background-color: ${segColor}22; color: ${segColor}; border: 1px solid ${segColor}44;">
                 ${s.Segment}
               </span>
             </td>
-            <td class="py-2.5 px-3 font-semibold text-gray-200">${formatNumber(s.customers)}</td>
-            <td class="py-2.5 px-3 text-gray-300">${s.avg_recency} days</td>
-            <td class="py-2.5 px-3 text-gray-300">${s.avg_frequency}</td>
-            <td class="py-2.5 px-3 text-gray-300">${formatCurrency(s.avg_monetary)}</td>
+            <td class="py-2.5 px-3 font-semibold text-white">${formatNumber(s.customers)}</td>
+            <td class="py-2.5 px-3 text-[#c9b9ce]">${s.avg_recency} days</td>
+            <td class="py-2.5 px-3 text-[#c9b9ce]">${s.avg_frequency}</td>
+            <td class="py-2.5 px-3 text-[#FAAE62]">${formatCurrency(s.avg_monetary)}</td>
             <td class="py-2.5 px-3 font-bold text-white">${formatCurrency(s.total_revenue)}</td>
           </tr>
         `;
@@ -463,15 +496,15 @@
     custBody.innerHTML = filtered.map((c, i) => {
       const segColor = colors.segmentColors[c.Segment] || '#94a3b8';
       return `
-        <tr class="hover:bg-gray-800/40 transition">
-          <td class="py-2.5 px-3 text-gray-400 font-bold">#${i + 1}</td>
-          <td class="py-2.5 px-3 font-semibold text-blue-400">ID ${c.CustomerID}</td>
-          <td class="py-2.5 px-3 text-gray-300">${c.Recency} days</td>
-          <td class="py-2.5 px-3 text-gray-300">${c.Frequency} orders</td>
-          <td class="py-2.5 px-3 font-bold text-white">${formatCurrency(c.Monetary)}</td>
-          <td class="py-2.5 px-3 text-gray-300"><span class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 font-mono">${c.RFM_score}</span></td>
+        <tr class="hover:bg-[#3E0856]/30 transition">
+          <td class="py-2.5 px-3 text-[#FAAE62] font-bold">#${i + 1}</td>
+          <td class="py-2.5 px-3 font-semibold text-white">ID ${c.CustomerID}</td>
+          <td class="py-2.5 px-3 text-[#c9b9ce]">${c.Recency} days</td>
+          <td class="py-2.5 px-3 text-[#c9b9ce]">${c.Frequency} orders</td>
+          <td class="py-2.5 px-3 font-bold text-[#FAAE62]">${formatCurrency(c.Monetary)}</td>
+          <td class="py-2.5 px-3 text-white"><span class="px-2 py-0.5 rounded bg-[#3E0856] border border-[#FAAE62]/30 font-mono text-[#FAAE62]">${c.RFM_score}</span></td>
           <td class="py-2.5 px-3">
-            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold" style="background-color: ${segColor}18; color: ${segColor}; border: 1px solid ${segColor}35;">
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold" style="background-color: ${segColor}22; color: ${segColor}; border: 1px solid ${segColor}44;">
               ${c.Segment}
             </span>
           </td>
@@ -480,7 +513,7 @@
     }).join('');
   }
 
-  // 4. Render Country Breakdown Cards (Pure ISO Badges, Zero Emojis, Zero Hyphens)
+  // 4. Render Country Breakdown Cards (Plum Container, Gold Accents, ISO Badges)
   function renderCountryCards(countries) {
     const container = document.getElementById('country-cards-container');
     if (!container || !countries) return;
@@ -500,17 +533,17 @@
       const code = isoMap[c.country] || 'INT';
       const pct = ((c.revenue / totalRev) * 100).toFixed(1);
       return `
-        <div class="p-3.5 rounded-xl bg-gray-900/60 border border-gray-800 flex items-center justify-between hover:border-gray-700 transition">
+        <div class="p-3.5 rounded-xl bg-[#1d032b] border border-[#FAAE62]/20 flex items-center justify-between hover:border-[#FAAE62]/50 transition">
           <div class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center font-mono font-bold text-xs border border-blue-500/20">${code}</span>
+            <span class="w-8 h-8 rounded-lg bg-[#3E0856] text-[#FAAE62] flex items-center justify-center font-mono font-bold text-xs border border-[#FAAE62]/30">${code}</span>
             <div>
               <div class="font-bold text-xs text-white">${c.country}</div>
-              <div class="text-[11px] text-gray-400">${formatNumber(c.orders)} orders, ${c.customers} customers</div>
+              <div class="text-[11px] text-[#c9b9ce]">${formatNumber(c.orders)} orders, ${c.customers} customers</div>
             </div>
           </div>
           <div class="text-right">
-            <div class="font-bold text-xs text-white font-mono-num">${formatCurrency(c.revenue)}</div>
-            <div class="text-[11px] text-blue-400 font-mono-num">${pct}% share</div>
+            <div class="font-bold text-xs text-[#FAAE62] font-mono-num">${formatCurrency(c.revenue)}</div>
+            <div class="text-[11px] text-[#c084fc] font-mono-num">${pct}% share</div>
           </div>
         </div>
       `;
@@ -527,31 +560,31 @@
         <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-sm font-bold text-white">${o.column}</span>
-            <span class="px-2 py-0.5 rounded text-xs font-semibold ${o.outliers > 0 ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-400'}">
+            <span class="px-2 py-0.5 rounded text-xs font-semibold ${o.outliers > 0 ? 'bg-[#FAAE62]/15 text-[#FAAE62] border border-[#FAAE62]/30' : 'bg-emerald-500/15 text-emerald-400'}">
               ${o.outliers} Potential Outliers
             </span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-xs font-mono-num">
-            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
-              <span class="text-gray-400 text-[10px] block">Q1 25th Percentile</span>
-              <span class="font-bold text-gray-200">${o.q1}</span>
+            <div class="p-2 rounded bg-[#1a0327] border border-[#FAAE62]/20">
+              <span class="text-[#c9b9ce] text-[10px] block">Q1 25th Percentile</span>
+              <span class="font-bold text-white">${o.q1}</span>
             </div>
-            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
-              <span class="text-gray-400 text-[10px] block">Q3 75th Percentile</span>
-              <span class="font-bold text-gray-200">${o.q3}</span>
+            <div class="p-2 rounded bg-[#1a0327] border border-[#FAAE62]/20">
+              <span class="text-[#c9b9ce] text-[10px] block">Q3 75th Percentile</span>
+              <span class="font-bold text-white">${o.q3}</span>
             </div>
-            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
-              <span class="text-gray-400 text-[10px] block">Lower Bound</span>
-              <span class="font-bold text-gray-200">${o.lower_bound}</span>
+            <div class="p-2 rounded bg-[#1a0327] border border-[#FAAE62]/20">
+              <span class="text-[#c9b9ce] text-[10px] block">Lower Bound</span>
+              <span class="font-bold text-white">${o.lower_bound}</span>
             </div>
-            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
-              <span class="text-gray-400 text-[10px] block">Upper Bound</span>
-              <span class="font-bold text-gray-200">${o.upper_bound}</span>
+            <div class="p-2 rounded bg-[#1a0327] border border-[#FAAE62]/20">
+              <span class="text-[#c9b9ce] text-[10px] block">Upper Bound</span>
+              <span class="font-bold text-white">${o.upper_bound}</span>
             </div>
           </div>
-          <div class="text-[11px] text-gray-400 flex items-center justify-between pt-1">
-            <span>Mean: <strong class="text-gray-200">${o.mean}</strong></span>
-            <span>Std Dev: <strong class="text-gray-200">${o.std}</strong></span>
+          <div class="text-[11px] text-[#c9b9ce] flex items-center justify-between pt-1">
+            <span>Mean: <strong class="text-[#FAAE62]">${o.mean}</strong></span>
+            <span>Std Dev: <strong class="text-[#c084fc]">${o.std}</strong></span>
           </div>
         </div>
       `;
@@ -567,15 +600,15 @@
     tbody.innerHTML = metrics.map(rowMetric => {
       return `
         <tr>
-          <td class="py-2.5 px-3 font-semibold text-gray-200 text-left">${rowMetric}</td>
+          <td class="py-2.5 px-3 font-semibold text-[#FAAE62] text-left">${rowMetric}</td>
           ${metrics.map(colMetric => {
             const val = corr[rowMetric] ? corr[rowMetric][colMetric] : 0;
-            let bgColor = 'rgba(255, 255, 255, 0.02)';
-            if (val === 1) bgColor = 'rgba(37, 99, 235, 0.18)';
-            else if (val > 0.4) bgColor = 'rgba(5, 150, 105, 0.18)';
-            else if (val < -0.2) bgColor = 'rgba(225, 29, 72, 0.18)';
+            let bgColor = 'rgba(250, 174, 98, 0.03)';
+            if (val === 1) bgColor = 'rgba(250, 174, 98, 0.22)';
+            else if (val > 0.4) bgColor = 'rgba(62, 8, 86, 0.45)';
+            else if (val < -0.2) bgColor = 'rgba(225, 29, 72, 0.25)';
 
-            return `<td class="py-2.5 px-3 text-gray-200 font-bold" style="background-color: ${bgColor}">${val.toFixed(3)}</td>`;
+            return `<td class="py-2.5 px-3 text-white font-bold" style="background-color: ${bgColor}">${val.toFixed(3)}</td>`;
           }).join('')}
         </tr>
       `;
@@ -608,17 +641,17 @@
 
     tbody.innerHTML = pageItems.map(r => {
       return `
-        <tr class="hover:bg-gray-800/40 transition">
-          <td class="py-2 px-3 text-blue-400 font-semibold">${r.InvoiceNo}</td>
-          <td class="py-2 px-3 text-gray-400">${r.InvoiceDate}</td>
-          <td class="py-2 px-3 text-gray-300 font-mono">${r.StockCode}</td>
+        <tr class="hover:bg-[#3E0856]/25 transition">
+          <td class="py-2 px-3 text-[#FAAE62] font-semibold">${r.InvoiceNo}</td>
+          <td class="py-2 px-3 text-[#c9b9ce]">${r.InvoiceDate}</td>
+          <td class="py-2 px-3 text-white font-mono">${r.StockCode}</td>
           <td class="py-2 px-3 font-medium text-white">${r.Description}</td>
-          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[11px] bg-gray-900 text-gray-300 border border-gray-800">${r.Category}</span></td>
-          <td class="py-2 px-3 text-gray-200">${r.Quantity}</td>
-          <td class="py-2 px-3 text-gray-300 font-mono-num">$${Number(r.UnitPrice).toFixed(2)}</td>
-          <td class="py-2 px-3 font-bold text-white font-mono-num">$${Number(r.Sales).toFixed(2)}</td>
-          <td class="py-2 px-3 text-gray-300">${r.CustomerID || 'Guest'}</td>
-          <td class="py-2 px-3 text-gray-400">${r.Country}</td>
+          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[11px] bg-[#3E0856] text-[#FAAE62] border border-[#FAAE62]/30">${r.Category}</span></td>
+          <td class="py-2 px-3 text-white">${r.Quantity}</td>
+          <td class="py-2 px-3 text-[#c9b9ce] font-mono-num">$${Number(r.UnitPrice).toFixed(2)}</td>
+          <td class="py-2 px-3 font-bold text-[#FAAE62] font-mono-num">$${Number(r.Sales).toFixed(2)}</td>
+          <td class="py-2 px-3 text-white">${r.CustomerID || 'Guest'}</td>
+          <td class="py-2 px-3 text-[#c9b9ce]">${r.Country}</td>
         </tr>
       `;
     }).join('');
@@ -800,7 +833,7 @@
     reader.readAsText(file);
   }
 
-  // 11. Export Active Records as CSV (No Hyphens in Filename)
+  // 11. Export Active Records as CSV
   function exportCsv() {
     const rows = filteredRecords;
     if (!rows || rows.length === 0) {
@@ -899,11 +932,11 @@
   }
 
   function getTextColor() {
-    return document.documentElement.getAttribute('data-theme') === 'light' ? '#475569' : '#94a3b8';
+    return document.documentElement.getAttribute('data-theme') === 'light' ? '#230432' : '#c9b9ce';
   }
 
   function getGridColor() {
-    return document.documentElement.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'rgba(62, 8, 86, 0.08)' : 'rgba(250, 174, 98, 0.08)';
   }
 
 })();
