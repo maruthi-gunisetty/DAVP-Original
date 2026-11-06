@@ -267,11 +267,11 @@ def run_pipeline():
         row["RFM_score"] = f"{r_sc}{f_sc}{m_sc}"
 
         if r_sc >= 3 and f_sc >= 3 and m_sc >= 3:
-            seg = "High-value"
+            seg = "High Value"
         elif r_sc >= 3 and f_sc >= 2:
-            seg = "Loyal / active"
+            seg = "Loyal Active"
         elif r_sc <= 2 and f_sc <= 2:
-            seg = "At-risk / inactive"
+            seg = "At Risk"
         else:
             seg = "Regular"
 

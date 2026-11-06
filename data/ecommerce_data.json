@@ -257,14 +257,14 @@
   ],
   "rfm": {
     "counts": {
-      "At-risk / inactive": 130,
+      "At Risk": 130,
       "Regular": 135,
-      "High-value": 101,
-      "Loyal / active": 84
+      "High Value": 101,
+      "Loyal Active": 84
     },
     "stats": [
       {
-        "Segment": "High-value",
+        "Segment": "High Value",
         "customers": 101,
         "avg_recency": 16.6,
         "avg_frequency": 9.7,
@@ -280,7 +280,7 @@
         "total_revenue": 31466.25
       },
       {
-        "Segment": "At-risk / inactive",
+        "Segment": "At Risk",
         "customers": 130,
         "avg_recency": 95.3,
         "avg_frequency": 4.81,
@@ -288,7 +288,7 @@
         "total_revenue": 21158.21
       },
       {
-        "Segment": "Loyal / active",
+        "Segment": "Loyal Active",
         "customers": 84,
         "avg_recency": 17.3,
         "avg_frequency": 6.98,
@@ -306,7 +306,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1128",
@@ -317,7 +317,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1390",
@@ -339,7 +339,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1230",
@@ -350,7 +350,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1275",
@@ -372,7 +372,7 @@
         "F_score": 3,
         "M_score": 4,
         "RFM_score": "334",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1189",
@@ -383,7 +383,7 @@
         "F_score": 2,
         "M_score": 4,
         "RFM_score": "224",
-        "Segment": "At-risk / inactive"
+        "Segment": "At Risk"
       },
       {
         "CustomerID": "1233",
@@ -394,7 +394,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1411",
@@ -405,7 +405,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1276",
@@ -427,7 +427,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1220",
@@ -438,7 +438,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1061",
@@ -449,7 +449,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1027",
@@ -482,7 +482,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1404",
@@ -493,7 +493,7 @@
         "F_score": 3,
         "M_score": 4,
         "RFM_score": "434",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1121",
@@ -504,7 +504,7 @@
         "F_score": 3,
         "M_score": 4,
         "RFM_score": "334",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1339",
@@ -515,7 +515,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1391",
@@ -526,7 +526,7 @@
         "F_score": 3,
         "M_score": 4,
         "RFM_score": "334",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1437",
@@ -537,7 +537,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1080",
@@ -559,7 +559,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1198",
@@ -570,7 +570,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1244",
@@ -581,7 +581,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1054",
@@ -592,7 +592,7 @@
         "F_score": 2,
         "M_score": 4,
         "RFM_score": "224",
-        "Segment": "At-risk / inactive"
+        "Segment": "At Risk"
       },
       {
         "CustomerID": "1207",
@@ -614,7 +614,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "344",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1004",
@@ -647,7 +647,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1318",
@@ -669,7 +669,7 @@
         "F_score": 4,
         "M_score": 4,
         "RFM_score": "444",
-        "Segment": "High-value"
+        "Segment": "High Value"
       },
       {
         "CustomerID": "1142",

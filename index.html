@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAVP: E-Commerce Sales & Customer Behaviour Intelligence</title>
+  <title>DAVP Intelligence: Ecommerce Sales and Customer Behaviour Analytics</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -14,6 +14,7 @@
           colors: {
             brand: {
               50: '#eff6ff',
+              100: '#dbeafe',
               500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
@@ -29,78 +30,96 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="antialiased selection:bg-blue-500 selection:text-white">
+<body class="antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-50 glass-panel border-b px-4 lg:px-8 py-3 backdrop-blur-md">
+  <!-- Top Executive Navigation Bar -->
+  <header class="sticky top-0 z-50 glass-panel border-b px-4 lg:px-8 py-3.5 backdrop-blur-md">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
-      <!-- Brand & Project Title -->
+      <!-- Brand and Project Title -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 font-bold text-lg">
-          🛒
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-white dark:text-white" id="brand-title">DAVP Intelligence</h1>
-            <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">College Project</span>
+            <h1 class="font-bold text-base sm:text-lg tracking-tight text-white dark:text-white">DAVP Analytics</h1>
+            <span class="px-2 py-0.5 text-[11px] font-semibold rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30">Academic Project</span>
           </div>
-          <p class="text-xs text-gray-400 hidden sm:block">E-Commerce Sales & Customer Behaviour Analysis</p>
+          <p class="text-xs text-gray-400 hidden sm:block">Ecommerce Sales and Customer Behaviour Intelligence Platform</p>
         </div>
       </div>
 
-      <!-- Action Buttons & Controls -->
+      <!-- Action Controls -->
       <div class="flex items-center gap-2 sm:gap-3 no-print">
-        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-lg bg-gray-800/60 border border-gray-700/50 text-xs text-gray-300">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900/80 border border-gray-800 text-xs text-gray-300">
           <span class="live-dot"></span>
-          <span>Engine: Python 3.15 + JS</span>
+          <span>Engine: Python 3.15 and JavaScript</span>
         </div>
 
         <!-- Export CSV Button -->
-        <button id="btn-export-csv" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-1.5 shadow-sm">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <button id="btn-export-csv" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-2 shadow-sm">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
           <span class="hidden sm:inline">Export CSV</span>
         </button>
 
-        <!-- Print / PDF Button -->
-        <button id="btn-print" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 transition flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        <!-- Print PDF Report Button -->
+        <button id="btn-print" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gray-800/90 hover:bg-gray-700 border border-gray-700 text-gray-200 transition flex items-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
           <span class="hidden sm:inline">Print Report</span>
         </button>
 
         <!-- Theme Toggle -->
-        <button id="theme-toggle" title="Toggle Light/Dark Theme" class="p-2 rounded-lg bg-gray-800/80 hover:bg-gray-700 border border-gray-700 text-gray-300 hover:text-white transition">
-          <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          <svg id="theme-icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        <button id="theme-toggle" title="Toggle Theme" class="p-2 rounded-lg bg-gray-800/80 hover:bg-gray-700 border border-gray-700 text-gray-300 hover:text-white transition">
+          <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <svg id="theme-icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
         </button>
 
         <!-- GitHub Repository Link -->
-        <a href="https://github.com/maruthi-gunisetty/DAVP-Original" target="_blank" rel="noopener" class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 hover:text-white transition" title="View Source on GitHub">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <a href="https://github.com/maruthi-gunisetty/DAVP-Original" target="_blank" rel="noopener" class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 hover:text-white transition" title="View Repository on GitHub">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
         </a>
       </div>
     </div>
 
-    <!-- Tab Navigation -->
-    <div class="max-w-7xl mx-auto mt-3 pt-2 border-t border-gray-800/60 overflow-x-auto no-print">
+    <!-- Tab Navigation with Crisp Clean SVG Icons -->
+    <div class="max-w-7xl mx-auto mt-3 pt-2.5 border-t border-gray-800/60 overflow-x-auto no-print">
       <nav class="flex space-x-1 sm:space-x-2 min-w-max pb-1" id="tab-nav">
-        <button class="tab-btn active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-transparent transition" data-target="tab-overview">
-          📊 Overview & Trends
+        <button class="tab-btn active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2" data-target="tab-overview">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Overview and Trends</span>
         </button>
-        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-gray-400 hover:text-gray-200 transition" data-target="tab-rfm">
-          👥 Customer RFM Segmentation
+        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2" data-target="tab-rfm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <span>Customer RFM Segmentation</span>
         </button>
-        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-gray-400 hover:text-gray-200 transition" data-target="tab-geo">
-          🌍 Geographic Markets
+        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2" data-target="tab-geo">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Geographic Markets</span>
         </button>
-        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-gray-400 hover:text-gray-200 transition" data-target="tab-stats">
-          📈 Outliers & Correlation
+        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2" data-target="tab-stats">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+          <span>Outliers and Correlation</span>
         </button>
-        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-gray-400 hover:text-gray-200 transition" data-target="tab-dataset">
-          📋 Dataset Explorer
+        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2" data-target="tab-dataset">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7zm0 5h16M9 4v16"/></svg>
+          <span>Dataset Explorer</span>
         </button>
-        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-gray-400 hover:text-gray-200 transition" data-target="tab-documentation">
-          📖 Project Report & Methodology
+        <button class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2" data-target="tab-documentation">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <span>Project Report and Methodology</span>
         </button>
       </nav>
     </div>
@@ -112,24 +131,26 @@
     <section class="glass-panel rounded-2xl p-4 sm:p-5 no-print transition">
       <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center font-bold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
           </div>
           <div>
             <h2 class="text-sm font-bold text-gray-200">Interactive Analytics Filters</h2>
-            <p class="text-xs text-gray-400">Filter KPIs, charts, and customer tables dynamically</p>
+            <p class="text-xs text-gray-400">Filter KPIs, visual trends, and customer records dynamically</p>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 flex-1 lg:max-w-3xl">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 flex-1 lg:max-w-3xl">
           <!-- Category Filter -->
           <div>
-            <label class="block text-[11px] font-semibold text-gray-400 mb-1">Category</label>
-            <select id="filter-category" class="w-full text-xs rounded-lg bg-gray-800/90 border border-gray-700 px-2.5 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 transition">
+            <label class="block text-[11px] font-semibold text-gray-400 mb-1">Product Category</label>
+            <select id="filter-category" class="w-full text-xs rounded-lg bg-gray-900/90 border border-gray-700/80 px-2.5 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 transition">
               <option value="ALL">All Categories</option>
               <option value="Electronics">Electronics</option>
-              <option value="Home & Living">Home & Living</option>
+              <option value="Home & Living">Home and Living</option>
               <option value="Accessories">Accessories</option>
               <option value="Stationery">Stationery</option>
             </select>
@@ -137,8 +158,8 @@
 
           <!-- Country Filter -->
           <div>
-            <label class="block text-[11px] font-semibold text-gray-400 mb-1">Market / Country</label>
-            <select id="filter-country" class="w-full text-xs rounded-lg bg-gray-800/90 border border-gray-700 px-2.5 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 transition">
+            <label class="block text-[11px] font-semibold text-gray-400 mb-1">Market Region</label>
+            <select id="filter-country" class="w-full text-xs rounded-lg bg-gray-900/90 border border-gray-700/80 px-2.5 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 transition">
               <option value="ALL">All Markets</option>
               <option value="United Kingdom">United Kingdom</option>
               <option value="Germany">Germany</option>
@@ -151,20 +172,22 @@
 
           <!-- Segment Filter -->
           <div>
-            <label class="block text-[11px] font-semibold text-gray-400 mb-1">RFM Segment</label>
-            <select id="filter-segment" class="w-full text-xs rounded-lg bg-gray-800/90 border border-gray-700 px-2.5 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 transition">
+            <label class="block text-[11px] font-semibold text-gray-400 mb-1">Customer Segment</label>
+            <select id="filter-segment" class="w-full text-xs rounded-lg bg-gray-900/90 border border-gray-700/80 px-2.5 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 transition">
               <option value="ALL">All Segments</option>
-              <option value="High-value">High-value</option>
-              <option value="Loyal / active">Loyal / active</option>
+              <option value="High Value">High Value</option>
+              <option value="Loyal Active">Loyal Active</option>
               <option value="Regular">Regular</option>
-              <option value="At-risk / inactive">At-risk / inactive</option>
+              <option value="At Risk">At Risk</option>
             </select>
           </div>
 
           <!-- Reset Filter -->
           <div class="flex items-end">
-            <button id="btn-reset-filters" class="w-full text-xs rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-1.5 text-gray-300 hover:text-white transition flex items-center justify-center gap-1.5">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <button id="btn-reset-filters" class="w-full text-xs font-semibold rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-1.5 text-gray-300 hover:text-white transition flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
               <span>Reset Filters</span>
             </button>
           </div>
@@ -173,103 +196,114 @@
       </div>
     </section>
 
-    <!-- Executive KPI Grid (6 Stat Cards) -->
+    <!-- Executive KPI Grid (6 Stat Cards) with Clean Professional Vector Icons -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
       
       <!-- Total Revenue -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group hover:border-blue-500/50 transition">
+      <div class="glass-panel stat-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
         <div class="flex items-center justify-between text-gray-400 mb-2">
           <span class="text-xs font-semibold">Total Revenue</span>
-          <span class="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">💰</span>
+          <span class="p-1.5 rounded-lg bg-blue-600/15 text-blue-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </span>
         </div>
         <div class="space-y-1">
-          <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-revenue">$105,146</div>
-          <div class="text-[11px] text-emerald-400 flex items-center gap-1">
-            <span>↑ 100% Net</span>
-            <span class="text-gray-400">• Full Year</span>
+          <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-revenue">$105,146.28</div>
+          <div class="text-[11px] text-emerald-400 flex items-center gap-1 font-medium">
+            <span>Net Annual Aggregate</span>
           </div>
         </div>
       </div>
 
       <!-- Total Units Sold -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group hover:border-indigo-500/50 transition">
+      <div class="glass-panel stat-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
         <div class="flex items-center justify-between text-gray-400 mb-2">
           <span class="text-xs font-semibold">Units Sold</span>
-          <span class="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400">📦</span>
+          <span class="p-1.5 rounded-lg bg-indigo-600/15 text-indigo-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </span>
         </div>
         <div class="space-y-1">
           <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-units">6,368</div>
-          <div class="text-[11px] text-gray-400">1.99 units / line avg</div>
+          <div class="text-[11px] text-gray-400 font-medium">1.99 units per line avg</div>
         </div>
       </div>
 
       <!-- Unique Orders -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group hover:border-purple-500/50 transition">
+      <div class="glass-panel stat-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
         <div class="flex items-center justify-between text-gray-400 mb-2">
           <span class="text-xs font-semibold">Total Orders</span>
-          <span class="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">📑</span>
+          <span class="p-1.5 rounded-lg bg-purple-600/15 text-purple-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </span>
         </div>
         <div class="space-y-1">
           <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-orders">3,200</div>
-          <div class="text-[11px] text-gray-400">Invoices processed</div>
+          <div class="text-[11px] text-gray-400 font-medium">Invoices verified</div>
         </div>
       </div>
 
       <!-- Unique Customers -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/50 transition">
+      <div class="glass-panel stat-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
         <div class="flex items-center justify-between text-gray-400 mb-2">
           <span class="text-xs font-semibold">Active Customers</span>
-          <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">👥</span>
+          <span class="p-1.5 rounded-lg bg-emerald-600/15 text-emerald-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </span>
         </div>
         <div class="space-y-1">
           <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-customers">450</div>
-          <div class="text-[11px] text-gray-400">Tracked customer IDs</div>
+          <div class="text-[11px] text-gray-400 font-medium">Tracked client records</div>
         </div>
       </div>
 
       <!-- Average Order Value (AOV) -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/50 transition">
+      <div class="glass-panel stat-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
         <div class="flex items-center justify-between text-gray-400 mb-2">
           <span class="text-xs font-semibold">Avg Order Value</span>
-          <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">📊</span>
+          <span class="p-1.5 rounded-lg bg-amber-600/15 text-amber-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </span>
         </div>
         <div class="space-y-1">
           <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-aov">$32.86</div>
-          <div class="text-[11px] text-gray-400">Revenue / invoice</div>
+          <div class="text-[11px] text-gray-400 font-medium">Revenue per invoice</div>
         </div>
       </div>
 
       <!-- Repeat Purchase Rate -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group hover:border-rose-500/50 transition">
+      <div class="glass-panel stat-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
         <div class="flex items-center justify-between text-gray-400 mb-2">
           <span class="text-xs font-semibold">Repeat Rate</span>
-          <span class="p-1.5 rounded-lg bg-rose-500/10 text-rose-400">🔄</span>
+          <span class="p-1.5 rounded-lg bg-rose-600/15 text-rose-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </span>
         </div>
         <div class="space-y-1">
           <div class="text-xl sm:text-2xl font-extrabold text-white font-mono-num" id="kpi-repeat">97.8%</div>
-          <div class="text-[11px] text-emerald-400">High loyalty index</div>
+          <div class="text-[11px] text-emerald-400 font-medium">High retention cohort</div>
         </div>
       </div>
 
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 1: OVERVIEW & SALES TRENDS             -->
+    <!-- TAB 1: OVERVIEW AND SALES TRENDS           -->
     <!-- ========================================== -->
     <div id="tab-overview" class="tab-content space-y-6 animate-fade-in">
       
-      <!-- Charts Row 1: Monthly Revenue Trend & Day of Week -->
+      <!-- Charts Row 1: Monthly Revenue Trend and Day of Week -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         <!-- Monthly Revenue Chart (2 cols) -->
         <div class="lg:col-span-2 glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 class="text-base font-bold text-white">Monthly Revenue & Orders Trend</h3>
-              <p class="text-xs text-gray-400">Continuous performance trajectory across 2024</p>
+              <h3 class="text-base font-bold text-white">Monthly Revenue and Orders Trend</h3>
+              <p class="text-xs text-gray-400">Annual performance distribution across 2024</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="px-2.5 py-1 text-xs rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">12 Months</span>
+              <span class="px-2.5 py-1 text-xs rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">12 Calendar Months</span>
             </div>
           </div>
           <div class="h-72 w-full">
@@ -281,7 +315,7 @@
         <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
             <h3 class="text-base font-bold text-white">Revenue by Day of Week</h3>
-            <p class="text-xs text-gray-400">Shopping activity patterns across weekly cycles</p>
+            <p class="text-xs text-gray-400">Shopping volume distribution across weekdays</p>
           </div>
           <div class="h-72 w-full">
             <canvas id="chart-dow"></canvas>
@@ -290,31 +324,31 @@
 
       </div>
 
-      <!-- Charts Row 2: Category Breakdown & Top Products -->
+      <!-- Charts Row 2: Category Breakdown and Top Products -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         <!-- Category Doughnut -->
         <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
             <h3 class="text-base font-bold text-white">Revenue Share by Category</h3>
-            <p class="text-xs text-gray-400">Electronics, Home & Living, Accessories, Stationery</p>
+            <p class="text-xs text-gray-400">Electronics, Home and Living, Accessories, Stationery</p>
           </div>
           <div class="h-64 w-full flex items-center justify-center">
             <canvas id="chart-category"></canvas>
           </div>
           <div id="category-legend" class="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-gray-800">
-            <!-- Injected via app.js -->
+            <!-- Dynamically populated -->
           </div>
         </div>
 
-        <!-- Top 10 Best Selling Products (2 cols) -->
+        <!-- Top Best Selling Products (2 cols) -->
         <div class="lg:col-span-2 glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-base font-bold text-white">Top Products by Gross Revenue</h3>
-              <p class="text-xs text-gray-400">Ranking of catalog items by total sales yield</p>
+              <p class="text-xs text-gray-400">Ranked catalog items by total gross sales value</p>
             </div>
-            <span class="text-xs text-gray-400">10 Catalog SKUs</span>
+            <span class="text-xs text-gray-400 font-medium">10 Catalog SKUs</span>
           </div>
           <div class="h-72 w-full">
             <canvas id="chart-products"></canvas>
@@ -330,33 +364,46 @@
     <!-- ========================================== -->
     <div id="tab-rfm" class="tab-content space-y-6 hidden animate-fade-in">
       
-      <!-- RFM Methodology Cards -->
+      <!-- RFM Methodology Cards (Clean Vector Icons, Zero Hyphens) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
         <div class="glass-panel rounded-2xl p-5 space-y-2 border-l-4 border-blue-500">
-          <div class="text-xs font-bold text-blue-400 uppercase tracking-wider">R - Recency</div>
-          <div class="text-sm font-semibold text-white">Days Since Last Transaction</div>
-          <p class="text-xs text-gray-400">Measures customer activity freshness. Recent buyers are significantly more likely to convert on promotions.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Recency Metric</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 font-mono">Vector R</span>
+          </div>
+          <div class="text-sm font-bold text-white">Days Since Latest Transaction</div>
+          <p class="text-xs text-gray-400 leading-relaxed">Measures customer activity freshness. Recent buyers demonstrate significantly higher likelihood of response to engagement initiatives.</p>
         </div>
+
         <div class="glass-panel rounded-2xl p-5 space-y-2 border-l-4 border-purple-500">
-          <div class="text-xs font-bold text-purple-400 uppercase tracking-wider">F - Frequency</div>
-          <div class="text-sm font-semibold text-white">Total Order Volume</div>
-          <p class="text-xs text-gray-400">Measures loyalty and habitual buying patterns. Higher frequency customers form the revenue backbone.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Frequency Metric</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 font-mono">Vector F</span>
+          </div>
+          <div class="text-sm font-bold text-white">Total Order Volume</div>
+          <p class="text-xs text-gray-400 leading-relaxed">Quantifies habituality and transaction repetition. High frequency accounts construct the baseline retention layer.</p>
         </div>
+
         <div class="glass-panel rounded-2xl p-5 space-y-2 border-l-4 border-emerald-500">
-          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">M - Monetary</div>
-          <div class="text-sm font-semibold text-white">Gross Spend ($)</div>
-          <p class="text-xs text-gray-400">Identifies highest contributors to company cashflow and informs VIP loyalty tiering.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Monetary Metric</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-mono">Vector M</span>
+          </div>
+          <div class="text-sm font-bold text-white">Aggregate Dollar Spend</div>
+          <p class="text-xs text-gray-400 leading-relaxed">Identifies primary capital contributors to enterprise revenue streams and dictates premium relationship tiers.</p>
         </div>
+
       </div>
 
-      <!-- Segment Analysis & Distribution -->
+      <!-- Segment Analysis and Distribution -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- Segment Pie Chart -->
+        <!-- Segment Distribution Chart -->
         <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
             <h3 class="text-base font-bold text-white">Customer Segment Distribution</h3>
-            <p class="text-xs text-gray-400">Rule-based quartile segmentation</p>
+            <p class="text-xs text-gray-400">Rule based quartile cluster division</p>
           </div>
           <div class="h-64 w-full flex items-center justify-center">
             <canvas id="chart-rfm"></canvas>
@@ -382,7 +429,7 @@
                 </tr>
               </thead>
               <tbody id="rfm-matrix-body" class="divide-y divide-gray-800/60 font-mono-num">
-                <!-- Dynamically injected -->
+                <!-- Dynamically populated -->
               </tbody>
             </table>
           </div>
@@ -394,11 +441,11 @@
       <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 class="text-base font-bold text-white">Top High-Value Customers</h3>
+            <h3 class="text-base font-bold text-white">High Value Customers Leaderboard</h3>
             <p class="text-xs text-gray-400">Individual customer spend profiles with RFM quartile scores</p>
           </div>
           <div class="flex items-center gap-2">
-            <input type="text" id="cust-search" placeholder="Search Customer ID..." class="text-xs rounded-lg bg-gray-800/90 border border-gray-700 px-3 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 w-44">
+            <input type="text" id="cust-search" placeholder="Search Customer ID..." class="text-xs rounded-lg bg-gray-900/90 border border-gray-700/80 px-3 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 w-48">
           </div>
         </div>
 
@@ -408,7 +455,7 @@
               <tr>
                 <th class="py-3 px-3">Rank</th>
                 <th class="py-3 px-3">Customer ID</th>
-                <th class="py-3 px-3">Recency (Days)</th>
+                <th class="py-3 px-3">Recency Days</th>
                 <th class="py-3 px-3">Order Count</th>
                 <th class="py-3 px-3">Total Spend</th>
                 <th class="py-3 px-3">RFM Score</th>
@@ -416,7 +463,7 @@
               </tr>
             </thead>
             <tbody id="top-cust-body" class="divide-y divide-gray-800/50 font-mono-num">
-              <!-- Dynamically populated via app.js -->
+              <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
@@ -434,7 +481,7 @@
         <!-- Geographic Chart (2 cols) -->
         <div class="lg:col-span-2 glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
-            <h3 class="text-base font-bold text-white">Revenue by Country / Market</h3>
+            <h3 class="text-base font-bold text-white">Revenue by Country and Market</h3>
             <p class="text-xs text-gray-400">Total generated cashflow across domestic and export markets</p>
           </div>
           <div class="h-80 w-full">
@@ -442,14 +489,14 @@
           </div>
         </div>
 
-        <!-- Geographic Market Summary -->
+        <!-- Geographic Market Summary (ISO Badges, Zero Emojis) -->
         <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
             <h3 class="text-base font-bold text-white">Market Share Breakdown</h3>
-            <p class="text-xs text-gray-400">Regional sales concentration</p>
+            <p class="text-xs text-gray-400">Regional sales volume concentration</p>
           </div>
           <div id="country-cards-container" class="space-y-3">
-            <!-- Dynamically populated via app.js -->
+            <!-- Dynamically populated with ISO badges -->
           </div>
         </div>
 
@@ -458,15 +505,15 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 4: OUTLIERS & CORRELATION              -->
+    <!-- TAB 4: OUTLIERS AND CORRELATION            -->
     <!-- ========================================== -->
     <div id="tab-stats" class="tab-content space-y-6 hidden animate-fade-in">
       
       <!-- Outlier IQR Section -->
       <div class="space-y-4">
         <div>
-          <h3 class="text-lg font-bold text-white">Interquartile Range (IQR) Outlier Detection</h3>
-          <p class="text-xs text-gray-400">Statistical bounds detection: Q1 - 1.5×IQR (Lower) and Q3 + 1.5×IQR (Upper)</p>
+          <h3 class="text-lg font-bold text-white">Interquartile Range Outlier Detection</h3>
+          <p class="text-xs text-gray-400">Statistical bounds detection: Q1 minus 1.5 IQR and Q3 plus 1.5 IQR</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="outliers-container">
@@ -474,13 +521,13 @@
         </div>
       </div>
 
-      <!-- Correlation & Covariance Matrix -->
+      <!-- Correlation Matrix -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
             <h3 class="text-base font-bold text-white">Transaction Metric Correlation Matrix</h3>
-            <p class="text-xs text-gray-400">Pearson correlation coefficient between Quantity, Unit Price, and Sales</p>
+            <p class="text-xs text-gray-400">Pearson correlation coefficients between Quantity, Unit Price, and Sales</p>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-center text-xs">
@@ -497,36 +544,41 @@
               </tbody>
             </table>
           </div>
-          <div class="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-gray-300">
-            💡 <strong>Observation:</strong> Sales correlates strongly with both UnitPrice and Quantity as defined by the relation <code class="text-blue-400">Sales = Quantity × UnitPrice</code>. UnitPrice and Quantity are generated independently.
+          <div class="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-gray-300 leading-relaxed flex items-start gap-2.5">
+            <div class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <strong class="text-white">Observation:</strong> Sales correlates positively with both Unit Price and Quantity per definition of Sales equals Quantity times Unit Price. Unit Price and Quantity behave independently.
+            </div>
           </div>
         </div>
 
-        <!-- Data Cleaning & Quality Audit -->
+        <!-- Data Cleaning and Quality Audit -->
         <div class="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
           <div>
-            <h3 class="text-base font-bold text-white">Data Cleaning & Quality Audit</h3>
-            <p class="text-xs text-gray-400">Step-by-step pipeline sanitation results</p>
+            <h3 class="text-base font-bold text-white">Data Cleaning and Quality Audit</h3>
+            <p class="text-xs text-gray-400">Execution audit of data sanitation pipeline</p>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800/60 border border-gray-700/50">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-900/60 border border-gray-800">
               <span class="text-gray-300">Raw Records Ingested</span>
               <span class="font-bold text-white font-mono-num">3,200 rows</span>
             </div>
-            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800/60 border border-gray-700/50">
-              <span class="text-gray-300">Exact Duplicate Rows Removed</span>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-900/60 border border-gray-800">
+              <span class="text-gray-300">Exact Duplicate Records Removed</span>
               <span class="font-bold text-emerald-400 font-mono-num">0 duplicates</span>
             </div>
-            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800/60 border border-gray-700/50">
-              <span class="text-gray-300">Missing Customer IDs</span>
-              <span class="font-bold text-amber-400 font-mono-num">6 (Kept as Guest/Unknown)</span>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-900/60 border border-gray-800">
+              <span class="text-gray-300">Missing Customer Identifiers</span>
+              <span class="font-bold text-amber-400 font-mono-num">6 (Classified as Guest Accounts)</span>
             </div>
-            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800/60 border border-gray-700/50">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-900/60 border border-gray-800">
               <span class="text-gray-300">Missing Descriptions Imputed</span>
-              <span class="font-bold text-blue-400 font-mono-num">6 (Replaced with "Unknown")</span>
+              <span class="font-bold text-blue-400 font-mono-num">6 (Standardized to Unknown)</span>
             </div>
-            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800/60 border border-gray-700/50">
-              <span class="text-gray-300">Negative Sales / Returns Checked</span>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-gray-900/60 border border-gray-800">
+              <span class="text-gray-300">Negative Volume or Return Anomalies</span>
               <span class="font-bold text-emerald-400 font-mono-num">0 anomalies found</span>
             </div>
           </div>
@@ -537,24 +589,26 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 5: DATASET EXPLORER & CSV UPLOADER     -->
+    <!-- TAB 5: DATASET EXPLORER AND CSV UPLOAD     -->
     <!-- ========================================== -->
     <div id="tab-dataset" class="tab-content space-y-6 hidden animate-fade-in">
       
-      <!-- Live Dataset Upload Banner -->
-      <div class="glass-panel rounded-2xl p-5 border-dashed border-2 border-gray-700 hover:border-blue-500/80 transition flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center text-xl font-bold">
-            📂
+      <!-- Upload Banner -->
+      <div class="glass-panel rounded-2xl p-5 border border-dashed border-gray-700/80 hover:border-blue-500/80 transition flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-blue-600/15 text-blue-400 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
           </div>
           <div>
-            <h4 class="text-sm font-bold text-white">Upload Custom Dataset (.csv)</h4>
-            <p class="text-xs text-gray-400">Instantly recalculate KPIs, RFM scores, and charts with your own custom sales file!</p>
+            <h4 class="text-sm font-bold text-white">Upload Custom Dataset CSV</h4>
+            <p class="text-xs text-gray-400">Instantly recalculate KPIs, RFM scores, and charts with your own custom sales file</p>
           </div>
         </div>
         <div class="flex items-center gap-2 w-full md:w-auto">
-          <label class="cursor-pointer px-4 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition flex items-center justify-center gap-2 w-full md:w-auto">
-            <span>Choose CSV File</span>
+          <label class="cursor-pointer px-4 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition flex items-center justify-center gap-2 w-full md:w-auto shadow-sm">
+            <span>Select CSV File</span>
             <input type="file" id="csv-file-input" accept=".csv" class="hidden">
           </label>
         </div>
@@ -565,10 +619,10 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 class="text-base font-bold text-white">Sample Transactions Explorer</h3>
-            <p class="text-xs text-gray-400">Showing clean parsed transaction line items</p>
+            <p class="text-xs text-gray-400">Audited transaction records and line items</p>
           </div>
           <div class="flex items-center gap-2">
-            <input type="text" id="table-search" placeholder="Search orders, products..." class="text-xs rounded-lg bg-gray-800/90 border border-gray-700 px-3 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 w-52">
+            <input type="text" id="table-search" placeholder="Search orders, products, countries..." class="text-xs rounded-lg bg-gray-900/90 border border-gray-700/80 px-3 py-1.5 text-gray-200 focus:outline-none focus:border-blue-500 w-56">
           </div>
         </div>
 
@@ -589,7 +643,7 @@
               </tr>
             </thead>
             <tbody id="transactions-body" class="divide-y divide-gray-800/50 font-mono-num">
-              <!-- Dynamically populated via app.js -->
+              <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
@@ -598,8 +652,8 @@
         <div class="flex items-center justify-between pt-3 border-t border-gray-800 text-xs text-gray-400">
           <span id="page-info">Showing 1 to 20 of 200 entries</span>
           <div class="flex items-center gap-2">
-            <button id="btn-prev-page" class="px-2.5 py-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-200 disabled:opacity-40 transition">Previous</button>
-            <button id="btn-next-page" class="px-2.5 py-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-200 disabled:opacity-40 transition">Next</button>
+            <button id="btn-prev-page" class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-200 disabled:opacity-40 transition font-medium">Previous</button>
+            <button id="btn-next-page" class="px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-200 disabled:opacity-40 transition font-medium">Next</button>
           </div>
         </div>
 
@@ -608,53 +662,70 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 6: PROJECT REPORT & METHODOLOGY        -->
+    <!-- TAB 6: PROJECT REPORT AND METHODOLOGY      -->
     <!-- ========================================== -->
     <div id="tab-documentation" class="tab-content space-y-6 hidden animate-fade-in">
       
       <div class="glass-panel rounded-2xl p-6 sm:p-8 space-y-6">
         
         <div>
-          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">Academic Project</span>
-          <h2 class="text-2xl font-black text-white mt-2">Data Analysis & Visualization Project (DAVP)</h2>
-          <p class="text-sm text-gray-400">E-Commerce Sales & Customer Behaviour Analysis Using Python</p>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30">Academic Project</span>
+          <h2 class="text-2xl font-black text-white mt-2">Data Analysis and Visualization Project</h2>
+          <p class="text-sm text-gray-400">Ecommerce Sales and Customer Behaviour Analysis Using Python</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-gray-800">
           
           <div class="space-y-3">
             <h3 class="text-base font-bold text-white flex items-center gap-2">
-              <span>🎯</span> Project Objectives
+              <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Project Objectives</span>
             </h3>
-            <ul class="text-xs text-gray-300 space-y-2 list-disc list-inside leading-relaxed">
-              <li>End-to-end data processing workflow from data acquisition and standardization to EDA.</li>
-              <li>Robust handling of missing values, duplicates, and invalid transaction dates.</li>
-              <li>Statistical breakdown using NumPy and Pandas (measures of central tendency, IQR outliers, correlations).</li>
-              <li>Customer segmentation via RFM (Recency, Frequency, Monetary) rule-based quartile ranking.</li>
-              <li>Multi-library data visualization leveraging Matplotlib, Seaborn, and Plotly interactive graphics.</li>
+            <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                <span>Systematic data processing workflow encompassing ingestion, standardization, and exploratory analysis.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                <span>Auditing and treatment of missing fields, duplicates, and transaction timestamps.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                <span>Statistical analysis via NumPy and Pandas including IQR bounds and correlation matrices.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                <span>Customer segmentation through rule based quartile scoring across Recency, Frequency, and Monetary dimensions.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                <span>Interactive multi dimensional visualizations utilizing Chart.js, Matplotlib, and Plotly.</span>
+              </li>
             </ul>
           </div>
 
           <div class="space-y-3">
             <h3 class="text-base font-bold text-white flex items-center gap-2">
-              <span>🔬</span> Scientific Computing Stack
+              <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+              <span>Scientific Computing Ecosystem</span>
             </h3>
             <div class="grid grid-cols-2 gap-2 text-xs">
-              <div class="p-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
+              <div class="p-2.5 rounded-xl bg-gray-900/60 border border-gray-800">
                 <span class="font-bold text-blue-400">NumPy:</span>
-                <p class="text-gray-400 text-[11px] mt-0.5">Vectorized arrays, indexing, random distributions</p>
+                <p class="text-gray-400 text-[11px] mt-0.5">Vectorized arrays, indexing, random sampling</p>
               </div>
-              <div class="p-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
+              <div class="p-2.5 rounded-xl bg-gray-900/60 border border-gray-800">
                 <span class="font-bold text-indigo-400">Pandas:</span>
-                <p class="text-gray-400 text-[11px] mt-0.5">Series, DataFrames, aggregations, date slicing</p>
+                <p class="text-gray-400 text-[11px] mt-0.5">Series, DataFrames, aggregations, temporal slicing</p>
               </div>
-              <div class="p-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
-                <span class="font-bold text-emerald-400">Matplotlib / Seaborn:</span>
-                <p class="text-gray-400 text-[11px] mt-0.5">Statistical heatmaps, boxplots, histograms</p>
+              <div class="p-2.5 rounded-xl bg-gray-900/60 border border-gray-800">
+                <span class="font-bold text-emerald-400">Matplotlib and Seaborn:</span>
+                <p class="text-gray-400 text-[11px] mt-0.5">Statistical heatmaps, distributions, boxplots</p>
               </div>
-              <div class="p-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
-                <span class="font-bold text-purple-400">Plotly & Web App:</span>
-                <p class="text-gray-400 text-[11px] mt-0.5">Interactive dashboards, responsive charts, live filters</p>
+              <div class="p-2.5 rounded-xl bg-gray-900/60 border border-gray-800">
+                <span class="font-bold text-purple-400">Plotly and Web Engine:</span>
+                <p class="text-gray-400 text-[11px] mt-0.5">Dynamic web dashboards, responsive charts, live filters</p>
               </div>
             </div>
           </div>
@@ -663,26 +734,27 @@
 
         <div class="space-y-3 pt-4 border-t border-gray-800">
           <h3 class="text-base font-bold text-white flex items-center gap-2">
-            <span>💡</span> Strategic Insights & Business Recommendations
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span>Strategic Findings and Enterprise Recommendations</span>
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 space-y-1.5">
-              <span class="font-bold text-amber-400">1. High-Value Customer Retention</span>
-              <p class="text-gray-300 leading-relaxed">Top customers generate disproportionate revenue with high repeat rates (>90%). Deploy dedicated VIP loyalty incentives to sustain lifetime value.</p>
+            <div class="p-4 rounded-xl bg-gray-900/50 border border-gray-800 space-y-1.5">
+              <span class="font-bold text-amber-400">1. High Value Customer Retention</span>
+              <p class="text-gray-300 leading-relaxed">Top customers yield disproportionate transaction volume with repeat purchase rates exceeding ninety percent. Structuring targeted VIP loyalty initiatives sustains lifetime value.</p>
             </div>
-            <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 space-y-1.5">
+            <div class="p-4 rounded-xl bg-gray-900/50 border border-gray-800 space-y-1.5">
               <span class="font-bold text-blue-400">2. Product Portfolio Mix</span>
-              <p class="text-gray-300 leading-relaxed">Electronics items (Bluetooth Speaker, Wireless Mouse) provide the highest revenue per transaction line. Bundle with lower-ticket accessories to drive AOV.</p>
+              <p class="text-gray-300 leading-relaxed">Electronics items such as Bluetooth Speakers and Wireless Mice deliver peak revenue per order line. Strategic bundling with complementary accessories enhances Average Order Value.</p>
             </div>
-            <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 space-y-1.5">
-              <span class="font-bold text-emerald-400">3. Market Prioritization</span>
-              <p class="text-gray-300 leading-relaxed">The UK forms the dominant market (~48% of sales), followed by Germany and France. Expanding localized marketing in emerging markets like India represents high upside.</p>
+            <div class="p-4 rounded-xl bg-gray-900/50 border border-gray-800 space-y-1.5">
+              <span class="font-bold text-emerald-400">3. Market Regionalization</span>
+              <p class="text-gray-300 leading-relaxed">The United Kingdom represents the leading sales geography with approximately forty eight percent of volume. Scaling targeted marketing in emerging territories provides expansion potential.</p>
             </div>
           </div>
         </div>
 
         <div class="pt-4 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-2">
-          <span>Author: <strong>Maruthi Gunisetty</strong> (College DAVP Submission)</span>
+          <span>Author: <strong class="text-gray-200">Maruthi Gunisetty</strong> (College DAVP Submission)</span>
           <a href="https://github.com/maruthi-gunisetty/DAVP-Original" target="_blank" class="text-blue-400 hover:underline">github.com/maruthi-gunisetty/DAVP-Original</a>
         </div>
 
@@ -696,18 +768,17 @@
   <footer class="border-t border-gray-800/60 py-6 px-4 lg:px-8 mt-12 text-center text-xs text-gray-500 no-print">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
       <div>
-        <span>DAVP College Project • E-Commerce Sales and Customer Behaviour Analysis</span>
+        <span>DAVP College Project • Ecommerce Sales and Customer Behaviour Analytics</span>
       </div>
       <div>
-        <span>Built with Python 3.15, Pandas, NumPy, Tailwind CSS & Chart.js</span>
+        <span>Built with Python 3.15, Pandas, NumPy, Tailwind CSS, and Chart.js</span>
       </div>
     </div>
   </footer>
 
-  <!-- Initial Data Script (CORS-safe direct load) -->
+  <!-- Initial Data Script -->
   <script src="data/data.js"></script>
   <!-- Application Logic -->
   <script src="app.js"></script>
 </body>
 </html>
-

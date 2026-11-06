@@ -32,7 +32,7 @@ def run():
 
     url = f"http://localhost:{PORT}"
     print("=" * 60)
-    print("  🛒 DAVP E-Commerce Intelligence Dashboard Server")
+    print("  DAVP Ecommerce Intelligence Dashboard Server")
     print("=" * 60)
     print(f"  Local Address:  {url}")
     print(f"  Serving Dir:    {os.getcwd()}")

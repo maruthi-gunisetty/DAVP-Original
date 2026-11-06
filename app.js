@@ -1,5 +1,5 @@
 /**
- * DAVP: E-Commerce Sales and Customer Behaviour Intelligence Dashboard
+ * DAVP: Ecommerce Sales and Customer Behaviour Intelligence
  * Author: Maruthi Gunisetty
  */
 
@@ -23,23 +23,23 @@
 
   // Color Palettes
   const colors = {
-    blue: '#3b82f6',
-    blueLight: 'rgba(59, 130, 246, 0.25)',
-    purple: '#8b5cf6',
-    purpleLight: 'rgba(139, 92, 246, 0.25)',
-    emerald: '#10b981',
-    emeraldLight: 'rgba(16, 185, 129, 0.25)',
-    amber: '#f59e0b',
-    amberLight: 'rgba(245, 158, 11, 0.25)',
-    rose: '#f43f5e',
-    roseLight: 'rgba(244, 63, 94, 0.25)',
+    blue: '#2563eb',
+    blueLight: 'rgba(37, 99, 235, 0.22)',
+    purple: '#7c3aed',
+    purpleLight: 'rgba(124, 58, 237, 0.22)',
+    emerald: '#059669',
+    emeraldLight: 'rgba(5, 150, 105, 0.22)',
+    amber: '#d97706',
+    amberLight: 'rgba(217, 119, 6, 0.22)',
+    rose: '#e11d48',
+    roseLight: 'rgba(225, 29, 72, 0.22)',
     slate: '#64748b',
-    categoryColors: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'],
+    categoryColors: ['#2563eb', '#059669', '#d97706', '#7c3aed', '#db2777', '#0891b2'],
     segmentColors: {
-      'High-value': '#10b981',
-      'Loyal / active': '#3b82f6',
+      'High Value': '#059669',
+      'Loyal Active': '#2563eb',
       'Regular': '#94a3b8',
-      'At-risk / inactive': '#f43f5e'
+      'At Risk': '#e11d48'
     }
   };
 
@@ -115,7 +115,7 @@
     if (!ctx) return;
     if (chartMonthly) chartMonthly.destroy();
 
-    const labels = data.monthly.map(m => m.month);
+    const labels = data.monthly.map(m => m.month.replace('-', ' '));
     const revenues = data.monthly.map(m => m.revenue);
     const orders = data.monthly.map(m => m.orders);
 
@@ -149,7 +149,7 @@
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: { labels: { color: getTextColor(), font: { size: 11 } } },
+          legend: { labels: { color: getTextColor(), font: { size: 11, family: 'Plus Jakarta Sans' } } },
           tooltip: {
             callbacks: {
               label: function (context) {
@@ -187,7 +187,7 @@
     if (!ctx) return;
     if (chartDow) chartDow.destroy();
 
-    const labels = data.dayOfWeek.map(d => d.day.substring(0, 3));
+    const labels = data.dayOfWeek.map(d => d.day);
     const revenues = data.dayOfWeek.map(d => d.revenue);
 
     chartDow = new Chart(ctx, {
@@ -258,7 +258,7 @@
             }
           }
         },
-        cutout: '68%'
+        cutout: '70%'
       }
     });
 
@@ -268,8 +268,8 @@
       legendEl.innerHTML = data.categories.map((c, i) => {
         const pct = ((c.revenue / totalRev) * 100).toFixed(1);
         return `
-          <div class="flex items-center gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${colors.categoryColors[i]}"></span>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${colors.categoryColors[i]}"></span>
             <span class="text-gray-300 font-medium truncate">${c.category}:</span>
             <span class="text-gray-400 font-mono-num ml-auto">${pct}%</span>
           </div>
@@ -355,7 +355,7 @@
         plugins: {
           legend: {
             position: 'bottom',
-            labels: { color: getTextColor(), font: { size: 10 } }
+            labels: { color: getTextColor(), font: { size: 11, family: 'Plus Jakarta Sans' } }
           },
           tooltip: {
             callbacks: {
@@ -384,20 +384,20 @@
           label: 'Revenue by Country',
           data: revenues,
           backgroundColor: [
-            'rgba(59, 130, 246, 0.4)',
-            'rgba(16, 185, 129, 0.4)',
-            'rgba(139, 92, 246, 0.4)',
-            'rgba(245, 158, 11, 0.4)',
-            'rgba(244, 63, 94, 0.4)',
-            'rgba(6, 182, 212, 0.4)'
+            'rgba(37, 99, 235, 0.35)',
+            'rgba(5, 150, 105, 0.35)',
+            'rgba(124, 58, 237, 0.35)',
+            'rgba(217, 119, 6, 0.35)',
+            'rgba(225, 29, 72, 0.35)',
+            'rgba(8, 145, 178, 0.35)'
           ],
           borderColor: [
-            '#3b82f6',
-            '#10b981',
-            '#8b5cf6',
-            '#f59e0b',
-            '#f43f5e',
-            '#06b6d4'
+            '#2563eb',
+            '#059669',
+            '#7c3aed',
+            '#d97706',
+            '#e11d48',
+            '#0891b2'
           ],
           borderWidth: 1.5,
           borderRadius: 8
@@ -423,7 +423,7 @@
     });
   }
 
-  // 3. Render RFM Matrix & Top Customers
+  // 3. Render RFM Matrix and Top Customers
   function renderRfmTable(rfmData) {
     if (!rfmData) return;
 
@@ -435,8 +435,8 @@
         return `
           <tr class="hover:bg-gray-800/40 transition">
             <td class="py-2.5 px-3">
-              <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold" style="background-color: ${segColor}20; color: ${segColor}; border: 1px solid ${segColor}40;">
-                ● ${s.Segment}
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold" style="background-color: ${segColor}18; color: ${segColor}; border: 1px solid ${segColor}35;">
+                ${s.Segment}
               </span>
             </td>
             <td class="py-2.5 px-3 font-semibold text-gray-200">${formatNumber(s.customers)}</td>
@@ -466,12 +466,12 @@
         <tr class="hover:bg-gray-800/40 transition">
           <td class="py-2.5 px-3 text-gray-400 font-bold">#${i + 1}</td>
           <td class="py-2.5 px-3 font-semibold text-blue-400">ID ${c.CustomerID}</td>
-          <td class="py-2.5 px-3 text-gray-300">${c.Recency} d</td>
+          <td class="py-2.5 px-3 text-gray-300">${c.Recency} days</td>
           <td class="py-2.5 px-3 text-gray-300">${c.Frequency} orders</td>
           <td class="py-2.5 px-3 font-bold text-white">${formatCurrency(c.Monetary)}</td>
-          <td class="py-2.5 px-3 text-gray-400"><span class="px-1.5 py-0.5 rounded bg-gray-800 border border-gray-700">${c.RFM_score}</span></td>
+          <td class="py-2.5 px-3 text-gray-300"><span class="px-2 py-0.5 rounded bg-gray-900 border border-gray-800 font-mono">${c.RFM_score}</span></td>
           <td class="py-2.5 px-3">
-            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold" style="background-color: ${segColor}20; color: ${segColor}; border: 1px solid ${segColor}40;">
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold" style="background-color: ${segColor}18; color: ${segColor}; border: 1px solid ${segColor}35;">
               ${c.Segment}
             </span>
           </td>
@@ -480,32 +480,32 @@
     }).join('');
   }
 
-  // 4. Render Country Breakdown Cards
+  // 4. Render Country Breakdown Cards (Pure ISO Badges, Zero Emojis, Zero Hyphens)
   function renderCountryCards(countries) {
     const container = document.getElementById('country-cards-container');
     if (!container || !countries) return;
 
     const totalRev = countries.reduce((acc, c) => acc + c.revenue, 0);
 
-    const flagMap = {
-      'United Kingdom': '🇬🇧',
-      'Germany': '🇩🇪',
-      'France': '🇫🇷',
-      'Spain': '🇪🇸',
-      'India': '🇮🇳',
-      'Netherlands': '🇳🇱'
+    const isoMap = {
+      'United Kingdom': 'GB',
+      'Germany': 'DE',
+      'France': 'FR',
+      'Spain': 'ES',
+      'India': 'IN',
+      'Netherlands': 'NL'
     };
 
     container.innerHTML = countries.map(c => {
-      const flag = flagMap[c.country] || '🌐';
+      const code = isoMap[c.country] || 'INT';
       const pct = ((c.revenue / totalRev) * 100).toFixed(1);
       return `
-        <div class="p-3 rounded-xl bg-gray-800/50 border border-gray-700/60 flex items-center justify-between hover:border-gray-600 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-xl">${flag}</span>
+        <div class="p-3.5 rounded-xl bg-gray-900/60 border border-gray-800 flex items-center justify-between hover:border-gray-700 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center font-mono font-bold text-xs border border-blue-500/20">${code}</span>
             <div>
               <div class="font-bold text-xs text-white">${c.country}</div>
-              <div class="text-[11px] text-gray-400">${formatNumber(c.orders)} orders • ${c.customers} clients</div>
+              <div class="text-[11px] text-gray-400">${formatNumber(c.orders)} orders, ${c.customers} customers</div>
             </div>
           </div>
           <div class="text-right">
@@ -527,24 +527,24 @@
         <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-sm font-bold text-white">${o.column}</span>
-            <span class="px-2 py-0.5 rounded text-xs font-semibold ${o.outliers > 0 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'bg-emerald-500/20 text-emerald-400'}">
+            <span class="px-2 py-0.5 rounded text-xs font-semibold ${o.outliers > 0 ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-400'}">
               ${o.outliers} Potential Outliers
             </span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-xs font-mono-num">
-            <div class="p-2 rounded bg-gray-800/60 border border-gray-700/50">
-              <span class="text-gray-400 text-[10px] block">Q1 (25th%)</span>
+            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
+              <span class="text-gray-400 text-[10px] block">Q1 25th Percentile</span>
               <span class="font-bold text-gray-200">${o.q1}</span>
             </div>
-            <div class="p-2 rounded bg-gray-800/60 border border-gray-700/50">
-              <span class="text-gray-400 text-[10px] block">Q3 (75th%)</span>
+            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
+              <span class="text-gray-400 text-[10px] block">Q3 75th Percentile</span>
               <span class="font-bold text-gray-200">${o.q3}</span>
             </div>
-            <div class="p-2 rounded bg-gray-800/60 border border-gray-700/50">
+            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
               <span class="text-gray-400 text-[10px] block">Lower Bound</span>
               <span class="font-bold text-gray-200">${o.lower_bound}</span>
             </div>
-            <div class="p-2 rounded bg-gray-800/60 border border-gray-700/50">
+            <div class="p-2 rounded bg-gray-900/60 border border-gray-800">
               <span class="text-gray-400 text-[10px] block">Upper Bound</span>
               <span class="font-bold text-gray-200">${o.upper_bound}</span>
             </div>
@@ -570,10 +570,10 @@
           <td class="py-2.5 px-3 font-semibold text-gray-200 text-left">${rowMetric}</td>
           ${metrics.map(colMetric => {
             const val = corr[rowMetric] ? corr[rowMetric][colMetric] : 0;
-            let bgColor = 'rgba(255, 255, 255, 0.03)';
-            if (val === 1) bgColor = 'rgba(59, 130, 246, 0.2)';
-            else if (val > 0.4) bgColor = 'rgba(16, 185, 129, 0.2)';
-            else if (val < -0.2) bgColor = 'rgba(244, 63, 94, 0.2)';
+            let bgColor = 'rgba(255, 255, 255, 0.02)';
+            if (val === 1) bgColor = 'rgba(37, 99, 235, 0.18)';
+            else if (val > 0.4) bgColor = 'rgba(5, 150, 105, 0.18)';
+            else if (val < -0.2) bgColor = 'rgba(225, 29, 72, 0.18)';
 
             return `<td class="py-2.5 px-3 text-gray-200 font-bold" style="background-color: ${bgColor}">${val.toFixed(3)}</td>`;
           }).join('')}
@@ -582,7 +582,7 @@
     }).join('');
   }
 
-  // 7. Render Transaction Table & Pagination
+  // 7. Render Transaction Table and Pagination
   function renderTable() {
     const tbody = document.getElementById('transactions-body');
     if (!tbody) return;
@@ -613,7 +613,7 @@
           <td class="py-2 px-3 text-gray-400">${r.InvoiceDate}</td>
           <td class="py-2 px-3 text-gray-300 font-mono">${r.StockCode}</td>
           <td class="py-2 px-3 font-medium text-white">${r.Description}</td>
-          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[11px] bg-gray-800 text-gray-300 border border-gray-700">${r.Category}</span></td>
+          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[11px] bg-gray-900 text-gray-300 border border-gray-800">${r.Category}</span></td>
           <td class="py-2 px-3 text-gray-200">${r.Quantity}</td>
           <td class="py-2 px-3 text-gray-300 font-mono-num">$${Number(r.UnitPrice).toFixed(2)}</td>
           <td class="py-2 px-3 font-bold text-white font-mono-num">$${Number(r.Sales).toFixed(2)}</td>
@@ -792,7 +792,7 @@
         });
 
         renderTable();
-        alert(`Successfully parsed and loaded ${newRecords.length} records! Dashboard KPIs and tables have updated.`);
+        alert(`Successfully parsed and loaded ${newRecords.length} records into dashboard.`);
       } catch (err) {
         alert('Error parsing CSV file: ' + err.message);
       }
@@ -800,7 +800,7 @@
     reader.readAsText(file);
   }
 
-  // 11. Export Active Records as CSV
+  // 11. Export Active Records as CSV (No Hyphens in Filename)
   function exportCsv() {
     const rows = filteredRecords;
     if (!rows || rows.length === 0) {
@@ -825,10 +825,11 @@
       ].join(','))
     ].join('\n');
 
+    const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, '_');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `DAVP_Ecommerce_Report_${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `DAVP_Ecommerce_Report_${dateStr}.csv`;
     link.click();
   }
 
@@ -841,7 +842,7 @@
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-target');
 
-        tabButtons.forEach(b => b.classList.remove('active', 'text-blue-500'));
+        tabButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         tabContents.forEach(tc => {
@@ -898,7 +899,7 @@
   }
 
   function getTextColor() {
-    return document.documentElement.getAttribute('data-theme') === 'light' ? '#475569' : '#9ca3af';
+    return document.documentElement.getAttribute('data-theme') === 'light' ? '#475569' : '#94a3b8';
   }
 
   function getGridColor() {
@@ -906,4 +907,3 @@
   }
 
 })();
-
